@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Διάγραμμα Ροής - Mapbox Χάρτης</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #2d3748;
+        }
+        .mermaid {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="mermaid">
+%%{init: {'theme':'dark'}}%%
+flowchart TD
+    A[Έναρξη] --> B[Ορισμός HTML και δεδομένων]
+    B --> C[Φόρτωση βιβλιοθηκών Mapbox από CDN]
+    C --> D[Ορισμός CSS για σώμα και χάρτη]
+    D --> E[Δημιουργία div#info για συντεταγμένες]
+    E --> F[Δημιουργία div#map για χάρτη Mapbox]
+    F --> G[Ορισμός accessToken Mapbox]
+    G --> H[Αρχικοποίηση χάρτη με παραμέτρους]
+    H --> I[Περιορισμός ορίων χάρτη στην Αττική]
+    I --> J[Δήλωση κενής μεταβλητής marker]
+    
+    J --> K{Έγινε κλικ στο χάρτη;}
+    K -->|Όχι| K
+    K -->|Ναι| L[Λήψη γεωγραφικών συντεταγμένων]
+    L --> M[Στρογγυλοποίηση συντεταγμένων σε 5 δεκαδικά]
+    M --> N[Ενημέρωση κειμένου στο div#info]
+    
+    N --> O{Υπάρχει ήδη marker;}
+    O -->|Ναι| P[Αφαίρεση υπάρχοντος marker]
+    O -->|Όχι| Q[Δημιουργία νέου κόκκινου marker]
+    P --> Q
+    Q --> R[Προσθήκη marker στο χάρτη]
+    R --> K
+    </div>
+
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'dark'
+        });
+    </script>
+</body>
+</html>
